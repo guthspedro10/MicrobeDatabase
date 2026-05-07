@@ -3,14 +3,13 @@ package model;
 public class Microbe {
 
     private int id;
-    private String tipo, doencaAssociada, nome;
-    private String[] sintomas;
+    private String tipo, doencaAssociada, nome, sintomas;
 
-    public String[] getSintomas() {
+    public String getSintomas() {
         return sintomas;
     }
 
-    public void setSintomas(String[] sintomas) {
+    public void setSintomas(String sintomas) {
         this.sintomas = sintomas;
     }
 
