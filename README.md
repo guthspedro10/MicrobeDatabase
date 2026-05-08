@@ -2,9 +2,9 @@
 
 Project developed in **Java** that simulates a **basic microorganism registry system**.
 
-The application allows users to store and manage data about **viruses and bacteria**, including their classification, associated diseases, and symptoms.
+The application allows users to store and manage data about **viruses and bacteria**, including their classification, associated diseases, symptoms and transmission.
 
-This project was created to practice **Java (MVC + DAO architecture)**, **SQL databases**, and basic **web development concepts**.
+This project was created to practice **Java (MVC + DAO architecture)** and **SQL databases**.
 
 ---
 
@@ -23,8 +23,6 @@ This project was created to practice **Java (MVC + DAO architecture)**, **SQL da
 * **Java**
 * **JDBC**
 * **MySQL**
-* **HTML / CSS**
-* **JSP & Servlets**
 
 ---
 
@@ -71,21 +69,21 @@ Create the database:
 
 ```sql
 CREATE DATABASE microbe;
-
 USE microbe;
 
 CREATE TABLE microbe (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY,
     name VARCHAR(100),
-    type VARCHAR(20),
+    type VARCHAR(30),
     disease VARCHAR(100),
-    symptoms TEXT
+    symptoms TEXT,
+    transmission VARCHAR(100)
 );
 ```
 
 ---
 
-Run the application using your Java environment or servlet container.
+Run the application using your Java environment.
 
 ---
 
@@ -94,10 +92,12 @@ Run the application using your Java environment or servlet container.
 ### Stored data
 
 ```
+ID: 1
 Name: Influenza A
 Type: RNA Virus
 Disease: Flu
-Symptoms: Fever, cough, fatigue
+Symptoms: Fever, Cough, Fatigue
+Transmission: Airborne
 ```
 
 ---
@@ -125,4 +125,4 @@ This project was developed to:
 
 # 📌 Project Status
 
-🚧 **In Development** — Educational project focused on learning **Java, SQL, and Web Development**.
+🚧 **In Development** — Educational project focused on learning **Java** and **SQL**.
