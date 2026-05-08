@@ -1,17 +1,19 @@
 package model;
 
+/**
+ * Represents a microorganism entity in the system.
+ *
+ * This class stores basic information about a microbe,
+ * including its identification, classification, associated disease,
+ * symptoms, and transmission method.
+ *
+ * It is used as a data model to transfer information between
+ * different layers of the application.
+ */
 public class Microbe {
 
     private int id;
-    private String tipo, doencaAssociada, nome, sintomas;
-
-    public String getSintomas() {
-        return sintomas;
-    }
-
-    public void setSintomas(String sintomas) {
-        this.sintomas = sintomas;
-    }
+    private String type, disease, name, symptoms, transmission;
 
     public int getId() {
         return id;
@@ -21,27 +23,43 @@ public class Microbe {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getDoencaAssociada() {
-        return doencaAssociada;
+    public String getDisease() {
+        return disease;
     }
 
-    public void setDoencaAssociada(String doencaAssociada) {
-        this.doencaAssociada = doencaAssociada;
+    public void setDisease(String disease) {
+        this.disease = disease;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSymptoms() {
+        return symptoms;
+    }
+
+    public void setSymptoms(String symptoms) {
+        this.symptoms = symptoms;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
     }
 }

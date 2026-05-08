@@ -6,23 +6,46 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Data Access Object (DAO) responsible for handling
+ * persistence operations related to the Microbe entity.
+ *
+ * This class manages the database connection and
+ * executes SQL statements for data insertion.
+ */
 public class MicrobeDAO {
 
+    /**
+     * Database connection instance.
+     */
     private Connection con;
 
-    public MicrobeDAO(Connection con) {
+    /**
+     * Constructs a MicrobeDAO and initializes the database connection.
+     */
+    public MicrobeDAO() {
         con = DBConnection.createConnection();
     }
 
-    public void insereDados (Microbe microbe) throws SQLException {
+    /**
+     * Inserts a Microbe object into the database.
+     *
+     * @param microbe the Microbe object containing data to be inserted
+     * @throws SQLException if an error occurs during SQL execution
+     */
+    public void insertData (Microbe microbe) throws SQLException {
 
-        String sql = "insert into microbe values (?,?,?,?,?,?,?)";
+        String sql = "insert into microbe values (?,?,?,?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, microbe.getId());
-        stmt.setString(2, microbe.getNome());
-        stmt.setString(3, microbe.getTipo());
-        stmt.setString(4, microbe.getDoencaAssociada());
-        stmt.setString(5, microbe.getSintomas());
+        stmt.setString(2, microbe.getName());
+        stmt.setString(3, microbe.getType());
+        stmt.setString(4, microbe.getDisease());
+        stmt.setString(5, microbe.getSymptoms());
+        stmt.setString(6, microbe.getTransmission());
+        stmt.executeUpdate();
+
+        System.out.println("Microbe inserted successfully!");
 
     }
 
