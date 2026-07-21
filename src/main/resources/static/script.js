@@ -1,7 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ==========================================
-    // 1. NAVEGAÇÃO DE ABAS
-    // ==========================================
     const navItems = document.querySelectorAll('.nav-item');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -20,17 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ==========================================
-    // 2. EVENTOS DO DOM
-    // ==========================================
-
-    // CREATE: Submissão do Form
-    const formMicrobe = document.getElementById("form-microbe");
+    const formMicrobe = document.getElementById('form-microbe');
     if (formMicrobe) {
-        formMicrobe.addEventListener("submit", handleCreateMicrobe);
+        formMicrobe.addEventListener('submit', createMicrobe);
     }
 
-    // READ: Atualizar Tabela
     const btnRefresh = document.getElementById('btn-refresh');
     if (btnRefresh) {
         btnRefresh.addEventListener('click', loadMicrobes);
@@ -41,75 +32,64 @@ document.addEventListener('DOMContentLoaded', () => {
         readTabBtn.addEventListener('click', loadMicrobes);
     }
 
-    // UPDATE: Buscar dados por ID e Salvar
     const btnFetchUpdate = document.getElementById('btn-fetch-update');
     if (btnFetchUpdate) {
-        btnFetchUpdate.addEventListener('click', handleFetchMicrobeForUpdate);
+        btnFetchUpdate.addEventListener('click', microbeForUpdate);
     }
 
     const formUpdate = document.getElementById('form-update');
     if (formUpdate) {
-        formUpdate.addEventListener('submit', handleUpdateMicrobe);
+        formUpdate.addEventListener('submit', updateMicrobe);
     }
 
-    // DELETE: Apagar por ID
     const btnDelete = document.getElementById('btn-delete');
     if (btnDelete) {
-        btnDelete.addEventListener('click', handleDeleteMicrobe);
+        btnDelete.addEventListener('click', deleteMicrobe);
     }
 });
 
-// ==========================================
-// 3. OPERAÇÃO: CREATE (POST)
-// ==========================================
-async function handleCreateMicrobe(event) {
-    event.preventDefault(); // Impede o reload da página
+async function createMicrobe(event) {
+    event.preventDefault();
 
-    const name = document.getElementById("create-name").value.trim();
-    const type = document.getElementById("create-type").value.trim();
-    const disease = document.getElementById("create-disease").value.trim();
-    const symptoms = document.getElementById("create-symptoms").value.trim();
-    const transmission = document.getElementById("create-transmission").value.trim();
+    const name = document.getElementById('create-name').value.trim();
+    const type = document.getElementById('create-type').value.trim();
+    const disease = document.getElementById('create-disease').value.trim();
+    const symptoms = document.getElementById('create-symptoms').value.trim();
+    const transmission = document.getElementById('create-transmission').value.trim();
 
     if (!name || !type || !disease || !symptoms || !transmission) {
-        alert("Por favor, preencha todos os campos.");
+        alert('Please fill in all fields.');
         return;
     }
 
     try {
-        const response = await fetch("/microbe", {
-            method: "POST",
+        const response = await fetch('/microbe', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name,
-                type,
-                disease,
-                symptoms,
-                transmission
+                name: name,
+                type: type,
+                disease: disease,
+                symptoms: symptoms,
+                transmission: transmission
             })
         });
 
         if (!response.ok) {
-            throw new Error(`Erro no servidor: ${response.status}`);
+            throw new Error('Server error');
         }
 
-        const data = await response.json();
-        console.log("Criado com sucesso:", data);
-
-        alert("Micróbio cadastrado com sucesso!");
-        document.getElementById("form-microbe").reset();
+        alert('Microbe registered successfully!');
+        document.getElementById('form-microbe').reset();
 
     } catch (error) {
-        console.error("Erro ao enviar POST:", error);
-        alert("Falha ao salvar o micróbio. Verifique se o servidor backend está rodando.");
+        console.error(error);
+        alert('Failed to save microbe.');
     }
 }
 
-// ==========================================
-// 4. OPERAÇÃO: READ (GET)
-// ==========================================
 async function loadMicrobes() {
     const tableBody = document.getElementById('microbe-table-body');
     if (!tableBody) return;
@@ -120,32 +100,33 @@ async function loadMicrobes() {
         const response = await fetch('/microbe');
 
         if (!response.ok) {
-            throw new Error(`Erro: ${response.status}`);
+            throw new Error('Server error');
         }
 
         const microbes = await response.json();
 
-        if (!Array.isArray(microbes) || microbes.length === 0) {
+        if (microbes.length === 0) {
             tableBody.innerHTML = '<tr><td colspan="4" class="text-center">No microbes found.</td></tr>';
             return;
         }
 
         tableBody.innerHTML = '';
 
-        microbes.forEach(microbe => {
+        for (let i = 0; i < microbes.length; i++) {
+            const microbe = microbes[i];
             const row = document.createElement('tr');
 
             const tdId = document.createElement('td');
-            tdId.textContent = microbe.id ?? '-';
+            tdId.textContent = microbe.id;
 
             const tdName = document.createElement('td');
-            tdName.textContent = microbe.name ?? '';
+            tdName.textContent = microbe.name;
 
             const tdType = document.createElement('td');
-            tdType.textContent = microbe.type ?? '';
+            tdType.textContent = microbe.type;
 
             const tdDisease = document.createElement('td');
-            tdDisease.textContent = microbe.disease ?? '';
+            tdDisease.textContent = microbe.disease;
 
             row.appendChild(tdId);
             row.appendChild(tdName);
@@ -153,105 +134,113 @@ async function loadMicrobes() {
             row.appendChild(tdDisease);
 
             tableBody.appendChild(row);
-        });
+        }
 
     } catch (error) {
-        console.error('Erro ao carregar dados:', error);
+        console.error(error);
         tableBody.innerHTML = '<tr><td colspan="4" class="text-center text-red">Error loading data.</td></tr>';
     }
 }
 
-// ==========================================
-// 5. OPERAÇÃO: UPDATE (GET por ID + PUT)
-// ==========================================
-async function handleFetchMicrobeForUpdate() {
+async function microbeForUpdate() {
     const id = document.getElementById('update-id').value.trim();
 
     if (!id) {
-        alert("Informe o ID do micróbio.");
+        alert('Please enter a microbe ID.');
         return;
     }
 
     try {
-        const response = await fetch(`/microbe/${id}`);
-        if (!response.ok) throw new Error("Micróbio não encontrado.");
+        const response = await fetch('/microbe/' + id);
+
+        if (!response.ok) {
+            throw new Error('Microbe not found');
+        }
 
         const microbe = await response.json();
 
-        document.getElementById('update-name').value = microbe.name || '';
-        document.getElementById('update-type').value = microbe.type || '';
-        document.getElementById('update-disease').value = microbe.disease || '';
-        document.getElementById('update-symptoms').value = microbe.symptoms || '';
-        document.getElementById('update-transmission').value = microbe.transmission || '';
+        document.getElementById('update-name').value = microbe.name;
+        document.getElementById('update-type').value = microbe.type;
+        document.getElementById('update-disease').value = microbe.disease;
+        document.getElementById('update-symptoms').value = microbe.symptoms;
+        document.getElementById('update-transmission').value = microbe.transmission;
 
     } catch (error) {
         console.error(error);
-        alert("Micróbio não encontrado!");
+        alert('Microbe not found.');
     }
 }
 
-async function handleUpdateMicrobe(event) {
+async function updateMicrobe(event) {
     event.preventDefault();
 
     const id = document.getElementById('update-id').value.trim();
+
     if (!id) {
-        alert("Busque um ID antes de atualizar.");
+        alert('Please select a microbe ID first.');
         return;
     }
 
-    const payload = {
-        name: document.getElementById('update-name').value.trim(),
-        type: document.getElementById('update-type').value.trim(),
-        disease: document.getElementById('update-disease').value.trim(),
-        symptoms: document.getElementById('update-symptoms').value.trim(),
-        transmission: document.getElementById('update-transmission').value.trim()
-    };
+    const name = document.getElementById('update-name').value.trim();
+    const type = document.getElementById('update-type').value.trim();
+    const disease = document.getElementById('update-disease').value.trim();
+    const symptoms = document.getElementById('update-symptoms').value.trim();
+    const transmission = document.getElementById('update-transmission').value.trim();
 
     try {
-        const response = await fetch(`/microbe/${id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+        const response = await fetch('/microbe/' + id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                type: type,
+                disease: disease,
+                symptoms: symptoms,
+                transmission: transmission
+            })
         });
 
-        if (!response.ok) throw new Error("Falha ao atualizar.");
+        if (!response.ok) {
+            throw new Error('Update failed');
+        }
 
-        alert("Micróbio atualizado com sucesso!");
+        alert('Microbe updated successfully!');
 
     } catch (error) {
         console.error(error);
-        alert("Erro ao atualizar micróbio.");
+        alert('Failed to update microbe.');
     }
 }
 
-// ==========================================
-// 6. OPERAÇÃO: DELETE (DELETE)
-// ==========================================
-async function handleDeleteMicrobe() {
+async function deleteMicrobe() {
     const idInput = document.getElementById('delete-id');
     const id = idInput.value.trim();
 
     if (!id) {
-        alert("Por favor, digite o ID do micróbio a ser removido.");
+        alert('Please enter the ID to delete.');
         return;
     }
 
-    if (!confirm(`Tem certeza que deseja apagar o registro ID ${id}?`)) {
+    if (!confirm('Are you sure you want to delete ID ' + id + '?')) {
         return;
     }
 
     try {
-        const response = await fetch(`/microbe/${id}`, {
-            method: "DELETE"
+        const response = await fetch('/microbe/' + id, {
+            method: 'DELETE'
         });
 
-        if (!response.ok) throw new Error("Erro ao apagar registro.");
+        if (!response.ok) {
+            throw new Error('Delete failed');
+        }
 
-        alert("Micróbio removido com sucesso!");
-        idInput.value = "";
+        alert('Microbe deleted successfully!');
+        idInput.value = '';
 
     } catch (error) {
         console.error(error);
-        alert("Não foi possível apagar o registro.");
+        alert('Could not delete microbe.');
     }
 }
