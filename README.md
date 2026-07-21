@@ -17,6 +17,7 @@ This project was created to practice full-stack web development, REST API design
 
 The project follows a standard Spring Boot layered architecture coupled with a static web front-end:
 
+```
 MicrobeDatabase
 │
 ├── src/main/java/com/pedroguths/microbedatabase
@@ -33,10 +34,11 @@ MicrobeDatabase
     ├── js
     │   └── script.js                   # Asynchronous fetch logic and DOM handling
     └── index.html                      # Single-page application dashboard interface
+```
 
 ## 🛠️ Technologies
 
-* **Backend**: Java 17+, Spring Boot, Spring Data JPA
+* **Backend**: Java 21, Spring Boot, Spring Data JPA
 * **Frontend**: HTML5, CSS3, JavaScript (ES6+), FontAwesome
 * **Database**: H2 Database / MySQL (Spring Data JPA)
 * **Build Tool**: Maven
