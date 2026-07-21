@@ -46,8 +46,8 @@ MicrobeDatabase
 ## 🛠️ Technologies
 
 * **Backend**: Java 21, Spring Boot, Spring Data JPA
-* **Frontend**: HTML5, CSS3, JavaScript (ES6+), FontAwesome
-* **Database**: H2 Database / MySQL (Spring Data JPA)
+* **Frontend**: HTML5, CSS3, JavaScript
+* **Database**: MySQL (Spring Data JPA)
 * **Build Tool**: Maven
 
 ## 🚀 How to Run
