@@ -75,4 +75,4 @@ MicrobeDatabase
 
 ## 📌 Project Status
 
-✅ Completed – Educational project focused on learning Full-Stack Web Development, REST APIs, and Health Tech concepts.
+✅ Completed – Educational project focused on learning Backend Development, REST APIs, and Health Tech concepts.
