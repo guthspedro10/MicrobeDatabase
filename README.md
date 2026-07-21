@@ -36,10 +36,16 @@ MicrobeDatabase
 
 ## 🛠️ Technologies
 
-* **Backend**: Java 21, Spring Boot, Spring Data JPA
-* **Frontend**: HTML5, CSS3, JavaScript
-* **Database**: MySQL (Spring Data JPA)
-* **Build Tool**: Maven
+### Backend & Database
+- Java 21
+- Spring Boot (Web, REST API)
+- Spring Data JPA / Hibernate
+- MySQL (Managed via MySQL Workbench)
+- Maven (Dependency & Build Management)
+
+### Frontend
+- HTML5 & CSS3
+- JavaScript (Fetch API)
 
 ## 🚀 How to Run
 ```
