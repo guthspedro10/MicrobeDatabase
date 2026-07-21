@@ -36,11 +36,9 @@ MicrobeDatabase
 │       └── MicrobeRepository.java      # Spring Data JPA repository interface
 │
 └── src/main/resources/static
-    ├── css
-    │   └── style.css                   # Custom styles for the dashboard
-    ├── js
-    │   └── script.js                   # Asynchronous fetch logic and DOM handling
-    └── index.html                      # Single-page application dashboard interface
+    └── style.css                   # Custom styles for the dashboard
+    └── script.js                   # Asynchronous fetch logic and DOM handling
+    └── index.html                  # Single-page application dashboard interface
 ```
 
 ## 🛠️ Technologies
