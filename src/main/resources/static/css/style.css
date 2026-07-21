@@ -5,30 +5,32 @@
     font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* Fundo geral */
 body {
+    height: 100vh;
     background: #020617;
+    color: #e2e8f0;
+    overflow: hidden;
 }
 
-/* Layout */
 .layout {
     display: flex;
     height: 100vh;
-    overflow: hidden;
+    width: 100vw;
 }
 
 /* Sidebar */
 .sidebar {
     width: 220px;
-    background: linear-gradient(180deg, #020617, #0f172a);
-    color: #e2e8f0;
-    padding: 20px;
+    background: #0f172a;
+    border-right: 1px solid #1e293b;
+    padding: 20px 15px;
+    flex-shrink: 0;
 }
 
 .sidebar h1 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 25px;
-    text-align: center;
+    color: #f8fafc;
 }
 
 .sidebar ul {
@@ -36,117 +38,197 @@ body {
 }
 
 .sidebar li {
-    padding: 12px;
+    padding: 12px 14px;
     margin-bottom: 8px;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.2s;
+    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #94a3b8;
+    transition: all 0.2s ease;
 }
 
-/* Hover */
 .sidebar li:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
-
-/* Ativo */
-.sidebar .active {
-    background: #3b82f6;
-    color: white;
-}
-
-/* Conteúdo centralizado */
-.content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #020617;
-}
-
-/* Card */
-.card {
-    background: #0f172a;
-    color: #e2e8f0;
-    padding: 25px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 650px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-
-}
-
-/* Título */
-.card h2 {
-    margin-bottom: 20px;
+    background: #1e293b;
     color: #f1f5f9;
 }
 
-/* Grid horizontal */
+.sidebar li.active {
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Conteúdo Principal */
+.content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Controle de Abas */
+.tab-content {
+    display: none;
+    width: 100%;
+    max-width: 750px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Estilo dos Cards */
+.card {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 8px;
+}
+
+.card-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Form Grid */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
 }
 
-/* Campos que ocupam tudo */
-.form-grid textarea,
-.form-grid button {
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.field-group.full-width,
+.form-actions {
     grid-column: span 2;
 }
 
-/* Inputs */
-input, select, textarea {
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 8px;
-    border: 1px solid #334155;
-    background: #1e293b;
-    color: #e2e8f0;
-    transition: 0.2s;
+label {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 600;
 }
 
-/* Placeholder */
-input::placeholder,
-textarea::placeholder {
+/* Inputs, Selects e Textareas */
+input, select, textarea {
+    padding: 7px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: #f1f5f9;
+    width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+textarea {
+    resize: none;
+    height: 48px;
+}
+
+/* Botões e Cores */
+button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-yellow { background: #ca8a04; color: #fff; }
+.btn-red { background: #dc2626; color: #fff; }
+.btn-sm { padding: 6px 12px; font-size: 12px; background: #334155; color: #fff; }
+
+.text-blue { color: #3b82f6; }
+.text-green { color: #22c55e; }
+.text-yellow { color: #eab308; }
+.text-red { color: #ef4444; }
+
+/* Configuração da Aba READ (Permite Scroll na Tabela) */
+#tab-read {
+    height: 100%;
+}
+
+#tab-read .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.microbe-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.microbe-table th, .microbe-table td {
+    padding: 10px;
+    border-bottom: 1px solid #1e293b;
+    text-align: left;
+}
+
+.microbe-table th {
+    background: #1e293b;
+    color: #94a3b8;
+    position: sticky;
+    top: 0;
+}
+
+/* Controles de Busca e Delete */
+.search-box, .form-delete-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.search-box input, .form-delete-group input {
+    max-width: 200px;
+}
+
+.delete-warning {
+    margin-bottom: 15px;
+    font-size: 13px;
     color: #94a3b8;
 }
 
-/* Focus */
-input:focus, select:focus, textarea:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
-    outline: none;
-}
-
-/* Textarea padrão */
-textarea {
-    resize: none;
-}
-
-/* Transmissão só vertical */
-.vertical-only {
-    resize: vertical;
-    min-height: 70px;
-    max-height: 160px;
-}
-
-/* Botão */
-button {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-/* Hover botão */
-button:hover {
-    transform: scale(1.02);
-    opacity: 0.95;
-}
+.text-center { text-align: center; }

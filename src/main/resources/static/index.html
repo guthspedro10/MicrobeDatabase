@@ -2,7 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>MicrobeDatabase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicrobeDatabase - Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -10,63 +11,186 @@
 
 <div class="layout">
 
+    <!-- Sidebar com as 4 operações CRUD -->
     <aside class="sidebar">
-        <h1>🔬🦠 MicrobeDatabase</h1>
-
+        <h1>🔬 MicrobeDB</h1>
         <nav>
             <ul>
-                <li class="active"><i class="fa fa-plus"></i> New Microbe</li>
-                <li><i class="fa fa-list"></i> List</li>
-                <li><i class="fa fa-pen"></i> Update</li>
-                <li><i class="fa fa-trash"></i> Delete</li>
+                <li class="nav-item active" data-tab="tab-create">
+                    <i class="fa fa-plus"></i> Create
+                </li>
+                <li class="nav-item" data-tab="tab-read">
+                    <i class="fa fa-list"></i> Read
+                </li>
+                <li class="nav-item" data-tab="tab-update">
+                    <i class="fa fa-pen"></i> Update
+                </li>
+                <li class="nav-item" data-tab="tab-delete">
+                    <i class="fa fa-trash"></i> Delete
+                </li>
             </ul>
         </nav>
     </aside>
 
     <main class="content">
-        <div class="card">
-            <h2>New Microbe</h2>
 
-            <form class="form-grid" id="form-microbe">
+        <!-- 1. CREATE (Padrão) -->
+        <section id="tab-create" class="tab-content active">
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2><i class="fa fa-plus-circle text-blue"></i> Create New Microbe</h2>
+                </div>
 
-                <input
-                        type="text"
-                        id="input-name"
-                        placeholder="Name"
-                >
+                <form id="form-create" class="form-grid">
+                    <div class="field-group">
+                        <label for="create-name">Name</label>
+                        <input type="text" id="create-name" placeholder="e.g., Escherichia coli" required>
+                    </div>
 
-                <select id="input-type">
-                    <option value=""></option>
-                    <option value="bacteria">Bacteria</option>
-                    <option value="virus">Virus</option>
-                </select>
+                    <div class="field-group">
+                        <label for="create-type">Type</label>
+                        <select id="create-type" required>
+                            <option value="" disabled selected>Select type...</option>
+                            <option value="Bacteria">Bacteria</option>
+                            <option value="Virus">Virus</option>
+                            <option value="Fungus">Fungus</option>
+                            <option value="Protozoa">Protozoa</option>
+                        </select>
+                    </div>
 
-                <input
-                        type="text"
-                        id="input-disease"
-                        placeholder="Disease"
-                >
+                    <div class="field-group full-width">
+                        <label for="create-disease">Disease</label>
+                        <input type="text" id="create-disease" placeholder="e.g., Gastroenteritis" required>
+                    </div>
 
-                <textarea
-                        id="input-symptoms"
-                        placeholder="Symptoms"></textarea>
+                    <div class="field-group full-width">
+                        <label for="create-symptoms">Symptoms</label>
+                        <textarea id="create-symptoms" placeholder="Describe main symptoms..." required></textarea>
+                    </div>
 
-                <textarea
-                        id="input-transmission"
-                        class="vertical-only"
-                        placeholder="Transmission"></textarea>
+                    <div class="field-group full-width">
+                        <label for="create-transmission">Transmission</label>
+                        <textarea id="create-transmission" placeholder="Describe transmission route..." required></textarea>
+                    </div>
 
-                <button
-                        type="submit"
-                        id="btn-save">
-                    <i class="fa fa-save"></i> Save Microbe
-                </button>
+                    <div class="form-actions full-width">
+                        <button type="submit" class="btn-primary">
+                            <i class="fa fa-save"></i> Save Microbe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
 
-            </form>
-        </div>
+        <!-- 2. READ -->
+        <section id="tab-read" class="tab-content">
+            <div class="card full-height-card">
+                <div class="card-header">
+                    <h2><i class="fa fa-list text-green"></i> Microbes List</h2>
+                    <button type="button" id="btn-refresh" class="btn-sm">
+                        <i class="fa fa-sync"></i> Refresh
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="microbe-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Disease</th>
+                        </tr>
+                        </thead>
+                        <tbody id="microbe-table-body">
+                        <tr>
+                            <td colspan="4" class="text-center">Loading...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. UPDATE -->
+        <section id="tab-update" class="tab-content">
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2><i class="fa fa-pen text-yellow"></i> Update Microbe</h2>
+                </div>
+
+                <div class="search-box">
+                    <input type="number" id="update-id" placeholder="Enter Microbe ID">
+                    <button type="button" id="btn-fetch-update" class="btn-yellow">
+                        <i class="fa fa-search"></i> Load Data
+                    </button>
+                </div>
+
+                <form id="form-update" class="form-grid">
+                    <div class="field-group">
+                        <label for="update-name">Name</label>
+                        <input type="text" id="update-name" placeholder="Name">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="update-type">Type</label>
+                        <select id="update-type">
+                            <option value="" disabled selected>Select type...</option>
+                            <option value="Bacteria">Bacteria</option>
+                            <option value="Virus">Virus</option>
+                            <option value="Fungus">Fungus</option>
+                            <option value="Protozoa">Protozoa</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group full-width">
+                        <label for="update-disease">Disease</label>
+                        <input type="text" id="update-disease" placeholder="Disease">
+                    </div>
+
+                    <div class="field-group full-width">
+                        <label for="update-symptoms">Symptoms</label>
+                        <textarea id="update-symptoms" placeholder="Symptoms"></textarea>
+                    </div>
+
+                    <div class="field-group full-width">
+                        <label for="update-transmission">Transmission</label>
+                        <textarea id="update-transmission" placeholder="Transmission"></textarea>
+                    </div>
+
+                    <div class="form-actions full-width">
+                        <button type="submit" id="btn-update-save" class="btn-yellow">
+                            <i class="fa fa-edit"></i> Update Microbe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- 4. DELETE -->
+        <section id="tab-delete" class="tab-content">
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2><i class="fa fa-trash text-red"></i> Delete Microbe</h2>
+                </div>
+
+                <div class="delete-box">
+                    <p class="delete-warning">Enter the ID of the record you want to permanently delete from the database.</p>
+
+                    <div class="form-delete-group">
+                        <input type="number" id="delete-id" placeholder="Microbe ID">
+                        <button type="button" id="btn-delete" class="btn-red">
+                            <i class="fa fa-trash"></i> Delete Permanently
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
 </div>
+
 <script src="js/script.js"></script>
 </body>
 </html>
