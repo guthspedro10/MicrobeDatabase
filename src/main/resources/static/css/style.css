@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Fundo geral */
+body {
+    background: #020617;
+}
+
+/* Layout */
+.layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: linear-gradient(180deg, #020617, #0f172a);
+    color: #e2e8f0;
+    padding: 20px;
+}
+
+.sidebar h1 {
+    font-size: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Hover */
+.sidebar li:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Ativo */
+.sidebar .active {
+    background: #3b82f6;
+    color: white;
+}
+
+/* Conteúdo centralizado */
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #020617;
+}
+
+/* Card */
+.card {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 25px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 650px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+
+}
+
+/* Título */
+.card h2 {
+    margin-bottom: 20px;
+    color: #f1f5f9;
+}
+
+/* Grid horizontal */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Campos que ocupam tudo */
+.form-grid textarea,
+.form-grid button {
+    grid-column: span 2;
+}
+
+/* Inputs */
+input, select, textarea {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: #e2e8f0;
+    transition: 0.2s;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+/* Focus */
+input:focus, select:focus, textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+    outline: none;
+}
+
+/* Textarea padrão */
+textarea {
+    resize: none;
+}
+
+/* Transmissão só vertical */
+.vertical-only {
+    resize: vertical;
+    min-height: 70px;
+    max-height: 160px;
+}
+
+/* Botão */
+button {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+/* Hover botão */
+button:hover {
+    transform: scale(1.02);
+    opacity: 0.95;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>MicrobeDatabase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <h1>🔬🦠 MicrobeDatabase</h1>
+
+        <nav>
+            <ul>
+                <li class="active"><i class="fa fa-plus"></i> New Microbe</li>
+                <li><i class="fa fa-list"></i> List</li>
+                <li><i class="fa fa-pen"></i> Update</li>
+                <li><i class="fa fa-trash"></i> Delete</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <div class="card">
+            <h2>New Microbe</h2>
+
+            <form class="form-grid" id="form-microbe">
+
+                <input
+                        type="text"
+                        id="input-name"
+                        placeholder="Name"
+                >
+
+                <select id="input-type">
+                    <option value=""></option>
+                    <option value="bacteria">Bacteria</option>
+                    <option value="virus">Virus</option>
+                </select>
+
+                <input
+                        type="text"
+                        id="input-disease"
+                        placeholder="Disease"
+                >
+
+                <textarea
+                        id="input-symptoms"
+                        placeholder="Symptoms"></textarea>
+
+                <textarea
+                        id="input-transmission"
+                        class="vertical-only"
+                        placeholder="Transmission"></textarea>
+
+                <button
+                        type="submit"
+                        id="btn-save">
+                    <i class="fa fa-save"></i> Save Microbe
+                </button>
+
+            </form>
+        </div>
+    </main>
+
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>
