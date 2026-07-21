@@ -2,6 +2,7 @@ package com.pedroguths.microbedatabase.controller;
 
 import com.pedroguths.microbedatabase.model.MicrobeModel;
 import com.pedroguths.microbedatabase.repository.MicrobeRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,4 +26,11 @@ public class MicrobeController {
     public List<MicrobeModel> findAll() {
         return microbeRepository.findAll();
     };
+
+   @DeleteMapping({"/{id}"})
+   @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+       microbeRepository.deleteById(id);
+   }
+
 }
