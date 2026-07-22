@@ -21,17 +21,16 @@
 The project follows a standard Spring Boot layered architecture coupled with a static web front-end:
 
 ```
-MicrobeDatabase
-│
-├── src/main/java/com/pedroguths/microbedatabase
-│   ├── controller
-│   │   └── MicrobeController.java      # REST API endpoints for CRUD operations
-│   ├── model
-│   │   └── MicrobeModel.java           # Entity mapping for microbes
-│   └── repository
-│       └── MicrobeRepository.java      # Spring Data JPA repository interface
-│
-└── src/main/resources/static
+
+src/main/java/com/pedroguths/microbedatabase
+├── controller
+│   └── MicrobeController.java      # REST API endpoints for CRUD operations
+├── model
+│   └── MicrobeModel.java           # Entity mapping for microbes
+└── repository
+    └── MicrobeRepository.java      # Spring Data JPA repository interface
+
+src/main/resources/static
     └── style.css                   # Custom styles for the dashboard
     └── script.js                   # Asynchronous fetch logic and DOM handling
     └── index.html                  # Single-page application dashboard interface
