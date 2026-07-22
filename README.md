@@ -9,12 +9,12 @@
 
 ## ⚙️ Features
 
-* **Full CRUD Operations**: Create, Read, Update, and Delete microbe records.
-* **Interactive Dashboard**: Tabbed interface built with HTML5, CSS3, and JavaScript.
-* **RESTful API**: Spring Boot controllers handling HTTP requests (GET, POST, PUT, DELETE).
-* **Entity Persistence**: Spring Data JPA for database interactions.
-* **XSS Prevention**: Safe DOM manipulation using textContent for dynamic table rendering.
-* **Modular Architecture**: Clean separation between controller, model, and repository layers.
+* Full CRUD Operations: Create, Read, Update, and Delete microbe records.
+* Interactive Dashboard: Tabbed interface built with HTML5, CSS3, and JavaScript.
+* RESTful API: Spring Boot controllers handling HTTP requests (GET, POST, PUT, DELETE).
+* Entity Persistence: Spring Data JPA for database interactions.
+* XSS Prevention: Safe DOM manipulation using textContent for dynamic table rendering.
+* Modular Architecture: Clean separation between controller, model, and repository layers.
 
 ## 🏗️ Project Structure
 
