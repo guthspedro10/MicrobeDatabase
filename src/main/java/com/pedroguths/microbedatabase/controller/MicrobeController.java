@@ -1,7 +1,8 @@
 package com.pedroguths.microbedatabase.controller;
 
-import com.pedroguths.microbedatabase.model.MicrobeModel;
-import com.pedroguths.microbedatabase.repository.MicrobeRepository;
+import com.pedroguths.microbedatabase.dto.request.MicrobeRequest;
+import com.pedroguths.microbedatabase.dto.response.MicrobeResponse;
+import com.pedroguths.microbedatabase.service.MicrobeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,26 +12,27 @@ import java.util.List;
 @RequestMapping("/microbe")
 public class MicrobeController {
 
-    private final MicrobeRepository microbeRepository;
+    private final MicrobeService microbeService;
 
-    public MicrobeController(MicrobeRepository microbeRepository) {
-        this.microbeRepository = microbeRepository;
+    public MicrobeController(MicrobeService microbeService) {
+        this.microbeService = microbeService;
     }
 
     @PostMapping
-    public MicrobeModel save(@RequestBody MicrobeModel microbeModel) {
-        return microbeRepository.save(microbeModel);
-    };
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(@RequestBody MicrobeRequest microbeRequest) {
+        microbeService.save(microbeRequest);
+    }
 
     @GetMapping
-    public List<MicrobeModel> findAll() {
-        return microbeRepository.findAll();
-    };
+    public List<MicrobeResponse> find() {
+        return microbeService.find();
+    }
 
-   @DeleteMapping({"/{id}"})
-   @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {
-       microbeRepository.deleteById(id);
-   }
+        microbeService.delete(id);
+    }
 
 }
