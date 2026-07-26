@@ -1,6 +1,6 @@
 # 🔬🦠 MicrobeDatabase
 
-![Learning](https://skillicons.dev/icons?i=java,spring,js,mysql,postman)
+![Learning](https://skillicons.dev/icons?i=java,spring,mysql,postman)
 
 - Project developed in Java with Spring Boot that manages a database of pathogenic microorganisms. 
 - The application features a complete CRUD dashboard allowing users to record, view, update, and remove information about microbes, their associated diseases, symptoms, and transmission routes.
@@ -55,10 +55,6 @@ src/main/resources/static
 - Spring Data JPA / Hibernate
 - MySQL (Managed via MySQL Workbench)
 - Maven (Dependency & Build Management)
-
-### Frontend
-- HTML5 & CSS3
-- JavaScript (Fetch API)
 
 ---
 
