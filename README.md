@@ -65,7 +65,13 @@ src/main/resources/static
 - MySQL Server & MySQL Workbench
 - Maven (or use the included ./mvnw wrapper)
 
-### 1. Database Setup
+### 1. Clone the repository
+
+```
+git clone https://github.com/guthspedro10/MicrobeDatabase.git
+```
+
+### 2. Database Setup
 Configure your MySQL database connection in src/main/resources/application.yaml:
 ```
 spring:
@@ -78,17 +84,15 @@ spring:
       ddl-auto: update
 ```
 
-### 2. Clone the repository
-```
-git clone https://github.com/guthspedro10/MicrobeDatabase.git
-```
+### 3. Run the Backend API
+
 ```
 cd MicrobeDatabase
 ```
-### 3. Run the Backend API
 ```
 ./mvnw spring-boot:run
 ```
+
 ### 4. Run the Frontend
 Simply open "http://localhost:8080" on your browser
 
