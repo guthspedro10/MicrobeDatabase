@@ -29,6 +29,17 @@ public class MicrobeController {
         return microbeService.find();
     }
 
+    @GetMapping("/update")
+    public MicrobeResponse findForUpdate(@RequestParam Long id) {
+        return microbeService.findForUpdate(id);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestParam Long id, @RequestBody MicrobeRequest microbeRequest) {
+        microbeService.update(id, microbeRequest);
+    }
+
     @DeleteMapping({"/{id}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {

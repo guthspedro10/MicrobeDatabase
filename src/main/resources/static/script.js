@@ -151,9 +151,9 @@ async function microbeForUpdate() {
     }
 
     try {
-        const response = await fetch('/microbe/' + id);
+        const response = await fetch('/microbe/update?id=' + id);
 
-        if (!response.ok) {
+        if (!response) {
             throw new Error('Microbe not found');
         }
 
@@ -188,7 +188,7 @@ async function updateMicrobe(event) {
     const transmission = document.getElementById('update-transmission').value.trim();
 
     try {
-        const response = await fetch('/microbe/' + id, {
+        const response = await fetch('/microbe?id=' + id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -207,6 +207,11 @@ async function updateMicrobe(event) {
         }
 
         alert('Microbe updated successfully!');
+
+        const formUpdate = document.getElementById('form-update');
+        if (formUpdate) {
+            formUpdate.reset();
+        }
 
     } catch (error) {
         console.error(error);

@@ -44,6 +44,36 @@ public class MicrobeService {
                 .toList();
     }
 
+    public void update(Long id, MicrobeRequest microbeRequest) {
+
+        MicrobeModel microbe = microbeRepository.findById(id).orElse(null);
+        assert microbe != null;
+
+        microbe.setName(microbeRequest.getName());
+        microbe.setType(microbeRequest.getType());
+        microbe.setDisease(microbeRequest.getDisease());
+        microbe.setSymptoms(microbeRequest.getSymptoms());
+        microbe.setTransmission(microbeRequest.getTransmission());
+
+        microbeRepository.save(microbe);
+    }
+
+    public MicrobeResponse findForUpdate(Long id) {
+
+        MicrobeModel microbe = microbeRepository.findById(id).orElse(null);
+
+        if (microbe == null) {
+            return null;
+        }
+
+        return new MicrobeResponse(microbe.getId(),
+                microbe.getName(),
+                microbe.getType(),
+                microbe.getDisease(),
+                microbe.getSymptoms(),
+                microbe.getTransmission());
+    }
+
     public void delete(Long id) {
         microbeRepository.deleteById(id);
     }
