@@ -2,7 +2,7 @@ spring:
   application:
     name: Microbe-Database
   datasource:
-    url: jdbc:mysql://localhost:3306/microbeDatabase?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/microbedatabase?createDatabaseIfNotExist=true
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 
