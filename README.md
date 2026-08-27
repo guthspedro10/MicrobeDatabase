@@ -71,7 +71,7 @@ src/main/resources/static
 git clone https://github.com/guthspedro10/MicrobeDatabase.git
 ```
 
-### 2. Database Setup
+### 2. Database Configuration
 Configure your MySQL database connection in src/main/resources/application.yaml:
 ```
 spring:
